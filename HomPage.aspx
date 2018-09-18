@@ -34,8 +34,8 @@
 					“我从来没有招惹你，你为什么要来招惹我？<br /><br />
                 	&nbsp;既然招惹了，就不要半途而废!”
 				</p>
-				<div class="weixin hom-left"></div>
-				<div class="qq hom-left"></div>
+				///<div class="weixin hom-left"></div>
+				///<div class="qq hom-left"></div>
 			</div>
 		</div>
 		<div class="content-hom">
