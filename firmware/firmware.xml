@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+	<firmware>
+	<series>MSO7000</series>
+	<version>00.01.00.08.01</version>
+	<url>http://172.16.3.252/flamingo/firmware/DS7000Update.GEL</url>
+	<comment_cn>New version available</comment_cn>
+	<comment_en>New version available</comment_en>
+	</firmware>
+</meta>
