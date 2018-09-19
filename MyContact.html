@@ -6,56 +6,142 @@
 		<!--引入reset.css清除浏览器默认样式-->
 		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
 		<link rel="stylesheet" type="text/css" href="css/style1.css"/>
+
+        <!--css-->
+        <link href="css/demo.css" rel="stylesheet" type="text/css" />
+
+        <!--javascript-->
+        <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+        <script src="js/demo.js" type="text/javascript"></script>
+
         <!--禁止查看源码-->
         <script>
             document.oncontextmenu = new Function("return false")
             document.onselectstart = new Function("return false") 
         </script>  
+	 
 	    <style type="text/css">
             .style1
             {
-                width: 100%;
-                height: 56px;
+                width: 99%;
+                height: 501px;
             }
             .style2
             {
-                width: 809px;
+                padding: 10px;
+                margin-bottom: 4px;
+                border: solid 1px gray;
+                width: 1414px;
+            }
+            .style3
+            {
+                padding: 10px;
+                margin-bottom: 10px;
+                background-color: #D3D8E0;
+                border: solid 1px gray;
+                width: 1417px;
             }
         </style>
+	 
 	</head>
+
 	<body>
 	<!--Nav-->
 	<div class="Nav-main">
 		<div class="logo"><a href="#" ><img src="img/logo.png"></a></div>
-		<ul class="nav">
-			<li><a href="Version.html">版本</a></li>
-			<li><a href="MyContact.html">马拉松</a></li>
+		<ul class="nav">		
+			<li><a href="MyContact.html">轨迹图</a></li>
+            <li><a href="Version.html">版本</a></li>
 			<li><a href="MyWorks.html">作品</a></li>
 			<li><a href="MyResume.html">简历</a></li>
 			<li><a href="HomPage.html">介绍</a></li>
 			<li><a href="index.html">主页</a></li>
 		</ul>
-	</div>
-
-	<!--联系-->
-		<div class="style1" id="lianxi">
-        	<div class="juzhong">
-        	</div>
-       </div>
+	</div>    
     <!--地址-->
-    <div class="dizhi">
-    <iframe width="604" height="525" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://j.map.baidu.com/2jiMI"></iframe>
-    
+    <br /> <br /> <br /> <br /> 
+    <div class="demo_main">
+    <fieldset class="style3">百度地图API显示多个标注点带提示的代码</fieldset>
+    <fieldset class="style2">
+    <div style="min-height: 300px; " id="map" class="style1">
     </div>
-		<!--footer开始-->
-	<div class="footer hom-left">
+    <script type="text/javascript">
+        var markerArr = [
+            { title: "名称：广州火车站", point: "113.264531,23.157003", address: "广东省广州市广州火车站", tel: "12306" },
+            { title: "名称：广州塔（赤岗塔）", point: "113.330934,23.113401", address: "广东省广州市广州塔（赤岗塔） ", tel: "18500000000" },
+            { title: "名称：广州动物园", point: "113.312213,23.147267", address: "广东省广州市广州动物园", tel: "18500000000" },
+            { title: "名称：天河公园", point: "113.372867,23.134274", address: "广东省广州市天河公园", tel: "18500000000" }
+        ];
+
+        function map_init() {
+            var map = new BMap.Map("map"); // 创建Map实例
+            var point = new BMap.Point(113.312213, 23.147267); //地图中心点，广州市
+            map.centerAndZoom(point, 7); // 初始化地图,设置中心点坐标和地图级别。
+            map.enableScrollWheelZoom(true); //启用滚轮放大缩小
+            //向地图中添加缩放控件
+            var ctrlNav = new window.BMap.NavigationControl({
+                anchor: BMAP_ANCHOR_TOP_LEFT,
+                type: BMAP_NAVIGATION_CONTROL_LARGE
+            });
+            map.addControl(ctrlNav);
+
+            //向地图中添加缩略图控件
+            var ctrlOve = new window.BMap.OverviewMapControl({
+                anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+                isOpen: 1
+            });
+            map.addControl(ctrlOve);
+
+            //向地图中添加比例尺控件
+            var ctrlSca = new window.BMap.ScaleControl({
+                anchor: BMAP_ANCHOR_BOTTOM_LEFT
+            });
+            map.addControl(ctrlSca);
+
+            var point = new Array(); //存放标注点经纬信息的数组
+            var marker = new Array(); //存放标注点对象的数组
+            var info = new Array(); //存放提示信息窗口对象的数组
+            for (var i = 0; i < markerArr.length; i++) {
+                var p0 = markerArr[i].point.split(",")[0]; //
+                var p1 = markerArr[i].point.split(",")[1]; //按照原数组的point格式将地图点坐标的经纬度分别提出来
+                point[i] = new window.BMap.Point(p0, p1); //循环生成新的地图点
+                marker[i] = new window.BMap.Marker(point[i]); //按照地图点坐标生成标记
+                map.addOverlay(marker[i]);
+                marker[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                var label = new window.BMap.Label(markerArr[i].title, { offset: new window.BMap.Size(20, -10) });
+                marker[i].setLabel(label);
+                info[i] = new window.BMap.InfoWindow("<p style=’font-size:12px;lineheight:1.8em;’>" + markerArr[i].title + "</br>地址：" + markerArr[i].address + "</br> 电话：" + markerArr[i].tel + "</br></p>"); // 创建信息窗口对象
+            }
+            marker[0].addEventListener("mouseover", function () {
+                this.openInfoWindow(info[0]);
+            });
+            marker[1].addEventListener("mouseover", function () {
+                this.openInfoWindow(info[1]);
+            });
+            marker[2].addEventListener("mouseover", function () {
+                this.openInfoWindow(info[2]);
+            });
+        }
+        //异步调用百度js
+        function map_load() {
+            var load = document.createElement("script");
+            load.src = "http://api.map.baidu.com/api?v=1.4&callback=map_init";
+            document.body.appendChild(load);
+        }
+        window.onload = map_load;
+    </script>
+    </fieldset>
+    </div>
+
+	<!--footer开始-->
+    <div class="footer hom-left">
 		<div class="w">
-			<p class="copy">Copyright 2018. Studio VIVROCKS. All Rights Reserved.</p><br />
+			<p class="copy">Copyright 2017. Studio VIVROCKS. All Rights Reserved.</p>
 			<p>Site Powered by Wordpress. Design and Developed by VIVROCKS.</p>
-			<p><a href="index.html">主页</a>  | <a href="HomPage.html">介绍</a> | <a href="MyResume.html">简历</a> | <a href="MyWorks.html">作品</a>| <a href="MyContact.html">马拉松</a>| <a href="Version.html">版本</a> </p>
-    		<p><a href="#">Privacy Policy</a> | <a href="#">Terms of use</a></p>
-		</div>
+			<p><a href="index.html">主页</a>  | <a href="HomPage.html">介绍</a> | <a href="MyResume.html">简历</a> | 
+               <a href="MyWorks.html">作品</a>| <a href="Version.html">版本</a> | <a href="MyContact.html">轨迹图</a> </p>
+    		<p><a href="#">Privacy Policy</a> | <a href="#">Terms of use</a></p>  
 	</div>
-		<!--footer结束-->
+	<!--footer结束-->
 	</body>
 </html>

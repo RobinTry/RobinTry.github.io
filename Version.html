@@ -8,11 +8,20 @@
             document.onselectstart = new Function("return false") 
         </script>  
         <!--密码登录-->
+        <!--Todo-->
         <script language="JavaScript"><!--    var password = "";
-            password = prompt('下载项目版本，需输入密码:', '');
+            password = prompt('下载项目版本，需输入密码:', '');  
             if (password != 'RobinTry')
             {
                 alert("密码不正确,无法进入本站!!!");
+                while(true)
+                {
+                    password = prompt('下载项目版本，需输入密码:', '');  
+                    if (password != 'RobinTry')
+                    {   alert("密码不正确,无法进入本站!!!");   }
+                    else
+                    {   break;  }
+                }
             }
         </script>
         <!--密码登录-->
@@ -43,7 +52,7 @@
 <table width="800" height="446" border="1" align="center">
   <tr>
     <td width="229" bgcolor="#C0504D"><div align="right" class="STYLE4">Revision Record</div></td>
-    <td width="442"><p><a href="http://172.16.3.252/flamingo/download/00.01.01.06.02.tar.gz" class="STYLE5">00.01.01.06.02</a></p></td>
+    <td width="442"><p><a href="https://github.com/RobinTry/RobinTry.github.io/tree/master/download/00.01.01.06.02.tar.gz" class="STYLE5">00.01.01.06.02</a></p></td>
   </tr>
   <tr>
     <td bgcolor="#C0504D"><div align="right" class="STYLE4">Release Date </div></td>
@@ -110,7 +119,7 @@
   </tr>
   <tr>
     <td bgcolor="#C0504D"><div align="right" class="STYLE7">Unit Test Report</div></td>
-    <td><a href="http://172.16.3.252/flamingo/unit_test">下载</a></td>
+    <td><a href="https://github.com/RobinTry/RobinTry.github.io/tree/master/unit_test">下载</a></td>
   </tr>
 </body>
 
