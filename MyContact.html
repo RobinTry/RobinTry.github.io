@@ -44,13 +44,15 @@
 			.footer{position: absolute;bottom: 0px;}
         </style>
 		<script>
-            $(function(){
+            $(function()
+			{
                 function calcHeight()
 				{
                     $("#map").height($("body").height()-270);
 				}
                 calcHeight();
-                $(window).resize(function () {
+                $(window).resize(function ()
+				{
                     calcHeight();
                 });
             });
@@ -76,10 +78,31 @@
     </div>
     <script type="text/javascript">
         var markerArr = [
-            { title: "名称：广州火车站", point: "113.264531,23.157003", address: "广东省广州市广州火车站", tel: "12306" },
-            { title: "名称：广州塔（赤岗塔）", point: "113.330934,23.113401", address: "广东省广州市广州塔（赤岗塔） ", tel: "18500000000" },
-            { title: "名称：广州动物园", point: "113.312213,23.147267", address: "广东省广州市广州动物园", tel: "18500000000" },
-            { title: "名称：天河公园", point: "113.372867,23.134274", address: "广东省广州市天河公园", tel: "18500000000" }
+            { title: "2016吉林", point: "126.527926,43.842958", address: "吉林 吉林", tel: "00000000000000" },
+            { title: "2016沈阳）", point: "123.4648825,41.7402014", address: "辽宁 沈阳", tel: "00000000000000" },
+            { title: "2016泰山", point: "117.0704914,36.203152", address: "山东 泰安", tel: "00000000000000" },
+            { title: "2016蛟河", point: "127.3334105,43.724697", address: "吉林 蛟河", tel: "00000000000000" },
+            { title: "2017徐州", point: "117.1973426,34.232679", address: "江苏 徐州", tel: "00000000000000" },
+            { title: "2017北京", point: "116.3915710,40.0097424", address: "北京 北京", tel: "00000000000000" },
+            { title: "2017长春", point: "125.307293,43.8527098", address: "吉林 长春", tel: "00000000000000" },
+            { title: "2017吉林", point: "126.618596,43.870524", address: "吉林 吉林", tel: "00000000000000" },
+            { title: "2017大同", point: "113.2870303,40.0962965", address: "山西 大同", tel: "00000000000000" },
+            { title: "2017合肥", point: "117.3032404,31.7268506", address: "安徽 合肥", tel: "00000000000000" },
+            { title: "2017密云", point: "116.8631169,40.3967045", address: "北京 密云", tel: "00000000000000" },
+            { title: "2018张家口", point: "114.88677566,40.8422491619", address: "河北 张家口", tel: "00000000000000" },
+            { title: "2018代县", point: "112.8851951,39.18169581", address: "山西 代县", tel: "00000000000000" },
+			{ title: "2018梅州", point: "116.1538202,24.26106273", address: "广东 梅州", tel: "00000000000000" },
+            { title: "2018厦门", point: "118.07351264,24.44231919", address: "福建 厦门", tel: "00000000000000" },
+            { title: "2018南昌", point: "115.87761021,28.62612747", address: "江西 南昌", tel: "00000000000000" },
+            { title: "2018韶关", point: "113.5969044,24.7942139081", address: "广东 韶关", tel: "00000000000000" },
+            { title: "2018宝安", point: "113.8508271042,22.6737883787", address: "深圳 宝安", tel: "00000000000000" },
+			{ title: "2018长沙", point: "112.9614041,28.183093608", address: "湖南 长沙", tel: "00000000000000" },
+            { title: "2018广州", point: "113.2669695049,23.1394137714", address: "广东 广州", tel: "00000000000000" },
+			{ title: "2019香港", point: "114.1702909877,22.2997909615", address: "中国 香港", tel: "00000000000000" },
+			{ title: "2019武汉", point: "114.3807200265,30.553397", address: "湖北 武汉", tel: "00000000000000" },
+            { title: "2019郑州", point: "113.66739862243655,34.7505675946018", address: "河南 郑州", tel: "00000000000000" },
+            { title: "2019清远", point: "113.0235504,23.7212308171", address: "广东 清远", tel: "00000000000000" },
+            { title: "2019海口", point: "110.3144644614,20.0327702639", address: "海南 海口", tel: "00000000000000" }
         ];
 
         function map_init() {
@@ -110,7 +133,8 @@
             var point = new Array(); //存放标注点经纬信息的数组
             var marker = new Array(); //存放标注点对象的数组
             var info = new Array(); //存放提示信息窗口对象的数组
-            for (var i = 0; i < markerArr.length; i++) {
+            for (var i = 0; i < markerArr.length; i++)
+            {
                 var p0 = markerArr[i].point.split(",")[0]; //
                 var p1 = markerArr[i].point.split(",")[1]; //按照原数组的point格式将地图点坐标的经纬度分别提出来
                 point[i] = new window.BMap.Point(p0, p1); //循环生成新的地图点
@@ -121,20 +145,24 @@
                 marker[i].setLabel(label);
                 info[i] = new window.BMap.InfoWindow("<p style=’font-size:12px;lineheight:1.8em;’>"
 					+ markerArr[i].title + "</br>地址：" + markerArr[i].address
-					+ "</br> 电话：" + markerArr[i].tel + "</br></p>"); // 创建信息窗口对象
+					+ "</br> 备注：" + markerArr[i].tel + "</br></p>"); // 创建信息窗口对象
             }
-            marker[0].addEventListener("mouseover", function () {
+            marker[0].addEventListener("mouseover", function ()
+			{
                 this.openInfoWindow(info[0]);
             });
-            marker[1].addEventListener("mouseover", function () {
+            marker[1].addEventListener("mouseover", function ()
+			{
                 this.openInfoWindow(info[1]);
             });
-            marker[2].addEventListener("mouseover", function () {
+            marker[2].addEventListener("mouseover", function ()
+			{
                 this.openInfoWindow(info[2]);
             });
         }
         //异步调用百度js
-        function map_load() {
+        function map_load()
+		{
             var load = document.createElement("script");
             load.src = "http://api.map.baidu.com/api?v=1.4&callback=map_init";
             document.body.appendChild(load);
@@ -147,7 +175,7 @@
 	<!--footer开始-->
     <div class="footer hom-left">
 		<div class="w">
-			<p class="copy">Copyright 2018. Studio VIVROCKS. All Rights Reserved.</p>
+			<p class="copy">Copyright 2019. Studio VIVROCKS. All Rights Reserved.</p>
 			<p>Site Powered by Wordpress. Design and Developed by VIVROCKS.</p>
 			<p><a href="index.html">主页</a>  | <a href="HomPage.html">介绍</a> |
 				<a href="MyWorks.html">作品</a>| <a href="MyContact.html">轨迹图</a> </p>
